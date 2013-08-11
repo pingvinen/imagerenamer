@@ -55,7 +55,7 @@ namespace ImageRenamer.Gui
 			this.labelCamera1.Name = "labelCamera1";
 			this.labelCamera1.Location = new System.Drawing.Point(margin, margin);
 			this.labelCamera1.BackColor = System.Drawing.Color.Transparent;
-			this.labelCamera1.Text = "Camera 1";
+			this.labelCamera1.Text = "Kamera 1";
 			this.labelCamera1.AutoSize = true;
 
 			//
@@ -85,7 +85,7 @@ namespace ImageRenamer.Gui
 			this.labelCamera2.Name = "labelCamera2";
 			this.labelCamera2.Location = new System.Drawing.Point(margin, this.buttonCamera1.Location.Y + this.buttonCamera1.Size.Height + margin);
 			this.labelCamera2.BackColor = System.Drawing.Color.Transparent;
-			this.labelCamera2.Text = "Camera 2";
+			this.labelCamera2.Text = "Kamera 2";
 			this.labelCamera2.AutoSize = true;
 			
 			//
@@ -125,7 +125,7 @@ namespace ImageRenamer.Gui
 			this.textOutput.Location = new System.Drawing.Point(margin, this.labelOutput.Location.Y + this.labelOutput.Height + halfMargin);
 			this.textOutput.Text = Config.GetInstance().OutputFolder;
 			this.textOutput.Size = new System.Drawing.Size(columnWidth, 23);
-			
+
 			// 
 			// buttonOutput
 			// 
@@ -147,6 +147,7 @@ namespace ImageRenamer.Gui
 			this.buttonRun.TabIndex = 1;
 			this.buttonRun.Text = "Start";
 			this.buttonRun.UseVisualStyleBackColor = true;
+			this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
 
 			// 
 			// Form1

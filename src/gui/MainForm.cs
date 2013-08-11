@@ -63,5 +63,40 @@ namespace ImageRenamer.Gui
 			}
 		}
 		#endregion Button output
+
+		#region Button run
+		private void buttonRun_Click(object sender, EventArgs e)
+		{
+			var worker = new TheWorker();
+
+			// just making sure manual changes to folders are saved
+			this.conf.Camera1Folder = this.textCamera1.Text;
+			this.conf.Camera2Folder = this.textCamera2.Text;
+			this.conf.OutputFolder = this.textOutput.Text;
+			this.conf.Save();
+
+			if (System.IO.Directory.Exists(this.conf.OutputFolder) && System.IO.Directory.GetFiles(this.conf.OutputFolder).Length > 0)
+			{
+				DialogResult dialogResult = MessageBox.Show("Output-mappen er ikke tom. Hvis en af de nye filer ender med at have det samme navn som en af filerne i output-mappen, vil der opstå en fejl, men du vil ikke miste filer. Vil du fortsætte alligevel?", "Some Title", MessageBoxButtons.YesNo);
+				if (dialogResult == DialogResult.No)
+				{
+					return;
+				}
+			}
+
+			try
+			{
+				this.buttonRun.Enabled = false;
+				worker.Run(this.conf.Camera1Folder, this.conf.Camera2Folder, this.conf.OutputFolder);
+				MessageBox.Show("Færdig");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString(), "Fejl");
+			}
+
+			this.buttonRun.Enabled = true;
+		}
+		#endregion Button run
 	}
 }
