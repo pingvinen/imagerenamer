@@ -8,7 +8,7 @@
     <ProjectGuid>{4A9B3A3B-3640-4959-BC6A-8B64C3CC83A0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ImageRenamer.Gui</RootNamespace>
-    <AssemblyName>gui</AssemblyName>
+    <AssemblyName>ImageRenamer</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>

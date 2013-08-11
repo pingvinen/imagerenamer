@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+CONFIGURATION="Release"
+PACKAGE_OUT="packages"
+
+for var in "$@"
+do
+	case "$var" in
+		"--help")
+			echo "Usage: makepackages [options]"
+			echo ""
+			echo "--release"
+			echo "	Compiles source code in release mode (this is the default)"
+			echo ""
+			echo "--debug"
+			echo "	Compiles source code in debug mode"
+			echo ""
+			exit
+			;;
+		"--release")
+			CONFIGURATION="Release"
+			;;
+		"--debug")
+			CONFIGURATION="Debug"
+			;;
+		*)
+			# do nothing
+			;;
+	esac
+done
+
+
+echo "Compiling code in $CONFIGURATION mode"
+echo "=========================================="
+./clearbuilds
+mdtool build --configuration:$CONFIGURATION src/imagerenamer.sln
+
+echo ""
+echo ""
+echo ""
+echo "Making package"
+echo "=========================================="
+TMP_DIR="_tmp"
+OUT="imagerenamer.zip"
+
+# remove tmp dir if it exists
+if [ -d "$TMP_DIR" ]; then
+	rm $TMP_DIR -rf
+fi
+
+# create the tmp dir
+mkdir $TMP_DIR
+
+# get the files
+cp src/gui/bin/$CONFIGURATION/* $TMP_DIR
+
+# pack it up
+cd $TMP_DIR
+zip ImageRenamer *
+mv ImageRenamer.zip ../
+cd ..
+
+#
+# clean up
+#
+rm $TMP_DIR -rf
