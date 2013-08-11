@@ -32,7 +32,7 @@ namespace ImageRenamer.Gui
 		{
 			get
 			{
-				return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ImageRenamer");
+				return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ImageRenamer");
 			}
 		}
 
