@@ -13,15 +13,24 @@ namespace ImageRenamer.Gui
 		public void Run(string cam1dir, string cam2dir, string outdir)
 		{
 			PictureCollection pics = new PictureCollection();
-			
+
+			string ext;
 			foreach (string f in Directory.GetFiles(cam1dir))
 			{
-				pics.AddFromFile(f);
+				ext = Path.GetExtension(f).ToLower();
+				if (ext.Equals(".jpg") || ext.Equals(".jpeg"))
+				{
+					pics.AddFromFile(f);
+				}
 			}
 			
 			foreach (string f in Directory.GetFiles(cam2dir))
 			{
-				pics.AddFromFile(f);
+				ext = Path.GetExtension(f).ToLower();
+				if (ext.Equals(".jpg") || ext.Equals(".jpeg"))
+				{
+					pics.AddFromFile(f);
+				}
 			}
 			
 			
