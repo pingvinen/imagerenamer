@@ -65,11 +65,11 @@ namespace ImageRenamer.Gui
 
 		private void CopyFile(string sourceFile, string destinationDir, DateTime timestamp, int increment)
 		{
-			string destination = Path.Combine(destinationDir, timestamp.ToString("yyyy_MM_dd__HHmmss"));
+			string destination = Path.Combine(destinationDir, timestamp.ToString("yyyy-MM-dd HHmmss"));
 			
 			if (increment >= 0)
 			{
-				destination = String.Format("{0}_{1}", destination, increment.ToString().PadLeft(2, '0'));
+				destination = String.Format("{0} {1}", destination, increment.ToString().PadLeft(2, '0'));
 			}
 			
 			
