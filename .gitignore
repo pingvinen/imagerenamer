@@ -11,3 +11,5 @@
 *.suo
 _tmp/
 ImageRenamer.zip
+.idea
+src/packages
