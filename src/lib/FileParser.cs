@@ -1,25 +1,27 @@
 using System;
-using TagLib;
 
 namespace ImageRenamer
 {
 	public class FileParser
 	{
+		private readonly MetaExtractor metaExtractor;
+		
 		public FileParser()
 		{
+			metaExtractor = new MetaExtractor();
 		}
 
 		public Picture GetPictureFromFile(string path)
 		{
-			File f = File.Create(path);
-			var res = new Picture() {
+			var res = new Picture {
 				Filename = path
 			};
 
-			var tag = (TagLib.Image.ImageTag)f.Tag;
-			if (tag.DateTime.HasValue)
+			var meta = metaExtractor.GetMetaDataFromFile(res.Filename);
+
+			if (meta.OriginalDateTime.HasValue)
 			{
-				res.DateTime = tag.DateTime.Value;
+				res.DateTime = meta.OriginalDateTime.Value;
 			}
 
 			return res;

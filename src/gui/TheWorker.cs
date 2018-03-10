@@ -6,33 +6,19 @@ namespace ImageRenamer.Gui
 {
 	public class TheWorker
 	{
+		private static IList<string> Extensions = new List<string> { ".jpg", ".jpeg", ".cr2", ".nef" };
+		
 		public TheWorker()
 		{
 		}
+		
 
-		public void Run(string cam1dir, string cam2dir, string outdir)
+		public void Run(string cam1Dir, string cam2Dir, string outdir)
 		{
 			PictureCollection pics = new PictureCollection();
 
-			string ext;
-			foreach (string f in Directory.GetFiles(cam1dir))
-			{
-				ext = Path.GetExtension(f).ToLower();
-				if (ext.Equals(".jpg") || ext.Equals(".jpeg"))
-				{
-					pics.AddFromFile(f);
-				}
-			}
-			
-			foreach (string f in Directory.GetFiles(cam2dir))
-			{
-				ext = Path.GetExtension(f).ToLower();
-				if (ext.Equals(".jpg") || ext.Equals(".jpeg"))
-				{
-					pics.AddFromFile(f);
-				}
-			}
-			
+			AddFilesFromDirectory(cam1Dir, pics);
+			AddFilesFromDirectory(cam2Dir, pics);
 			
 			if (pics.Count > 0)
 			{
@@ -59,6 +45,17 @@ namespace ImageRenamer.Gui
 							this.CopyFile(list[i].Filename, outdir, list[i].DateTime, i);
 						}
 					}
+				}
+			}
+		}
+
+		private void AddFilesFromDirectory(string dir, PictureCollection pics)
+		{
+			foreach (var f in Directory.GetFiles(dir))
+			{
+				if (Extensions.Contains(Path.GetExtension(f).ToLower()))
+				{
+					pics.AddFromFile(f);
 				}
 			}
 		}
